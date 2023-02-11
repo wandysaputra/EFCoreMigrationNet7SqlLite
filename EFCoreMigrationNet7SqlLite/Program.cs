@@ -7,6 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+// register the DbContext on the Container, it's on Scope lifetime
+// https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
+
+// To add migration script
+// PM> add-migration InitialMigration
+// PS> dotnet ef migrations add InitialMigration
+
+// To update database
+// PM> update-database
+// PS> dotnet ef database update
 builder.Services.AddDbContext<BooksContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("BooksDBConnectionString"))
